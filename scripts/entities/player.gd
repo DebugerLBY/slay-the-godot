@@ -6,6 +6,7 @@ var current_health: int
 var armor: int = 0
 var energy: int = 0
 var max_energy: int = 3
+var strength: int = 0  # 力量加成，增加伤害
 
 var deck: Deck
 var hand: Array[Card] = []
@@ -13,6 +14,7 @@ var hand: Array[Card] = []
 signal health_changed(new_health: int)
 signal armor_changed(new_armor: int)
 signal energy_changed(new_energy: int)
+signal strength_changed(new_strength: int)
 
 func _ready() -> void:
 	current_health = max_health
@@ -38,6 +40,10 @@ func add_armor(amount: int) -> void:
 	armor += amount
 	armor_changed.emit(armor)
 
+func add_strength(amount: int) -> void:
+	strength += amount
+	strength_changed.emit(strength)
+
 func heal(amount: int) -> void:
 	current_health += amount
 	current_health = min(max_health, current_health)
@@ -55,10 +61,14 @@ func play_card(card: Card) -> bool:
 	if card not in hand:
 		return false
 	
-	# 应用卡牌效果
-	card.apply_effect(self)
+	# 应用卡牌效果，考虑力量加成
+	var modified_card = card.duplicate()
+	if card.effect_type == "damage" and strength > 0:
+		modified_card.effect_value += strength
 	
-	# 移除卡牌并放入弃牌堆
+	modified_card.apply_effect(self)
+	
+	# 移除��牌并放入弃牌堆
 	hand.erase(card)
 	deck.discard_card(card)
 	
@@ -74,9 +84,11 @@ func end_turn() -> void:
 		deck.discard_card(card)
 	hand.clear()
 	
-	# 重置护甲
+	# 重置护甲和力量
 	armor = 0
 	armor_changed.emit(armor)
+	strength = 0
+	strength_changed.emit(strength)
 	
 	# 恢复能量
 	energy = max_energy
@@ -86,11 +98,13 @@ func reset() -> void:
 	current_health = max_health
 	armor = 0
 	energy = max_energy
+	strength = 0
 	hand.clear()
 	deck.reset()
 	health_changed.emit(current_health)
 	armor_changed.emit(armor)
 	energy_changed.emit(energy)
+	strength_changed.emit(strength)
 
 func is_alive() -> bool:
 	return current_health > 0

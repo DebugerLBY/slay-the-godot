@@ -38,14 +38,23 @@ func apply_effect(target: Node) -> void:
 		"heal":
 			if target.has_method("heal"):
 				target.heal(effect_value)
+		"strength":
+			if target.has_method("add_strength"):
+				target.add_strength(effect_value)
 
 func upgrade() -> void:
 	is_upgraded = true
-	# 升级后效果值增加20%
-	effect_value = int(effect_value * 1.2)
+	# 升级后效果值增加25%
+	effect_value = int(effect_value * 1.25)
 	# 如果有升级成本，成本减1
 	if cost > 0:
 		cost -= 1
 
 func get_display_text() -> String:
 	return "%s\n成本: %d\n%s" % [card_name, cost, description]
+
+func duplicate() -> Card:
+	var new_card = Card.new(card_id, card_name, cost, effect_type, effect_value, rarity)
+	new_card.description = description
+	new_card.is_upgraded = is_upgraded
+	return new_card
