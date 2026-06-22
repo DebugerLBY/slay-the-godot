@@ -1,0 +1,17 @@
+# Godot
+import/
+.godot/
+*.translation
+*.tscn~
+*.gd~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System
+.DS_Store
+Thumbs.db

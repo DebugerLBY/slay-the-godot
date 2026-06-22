@@ -1,0 +1,237 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5svm3y0ygfmw"]
+
+[ext_resource type="Script" path="res://scripts/battle/battle_manager.gd" id="1_a2x2p"]
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_a2x2p")
+
+[node name="Background" type="ColorRect"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.15, 0.15, 0.2, 1)
+
+[node name="GameLayer" type="Node2D" parent="."]
+
+[node name="Enemy" type="Node2D" parent="GameLayer"]
+position = Vector2(960, 180)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameLayer/Enemy"]
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameLayer/Enemy"]
+
+[node name="Player" type="Node2D" parent="GameLayer"]
+position = Vector2(320, 500)
+
+[node name="Sprite2D" type="Sprite2D" parent="GameLayer/Player"]
+scale = Vector2(2, 2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameLayer/Player"]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnemyHUD" type="Panel" parent="UILayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_right = 0.3
+anchor_bottom = 0.2
+
+[node name="EnemyNameLabel" type="Label" parent="UILayer/Control/EnemyHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 5.0
+offset_right = 50.0
+offset_bottom = 25.0
+text = "敌人"
+horizontal_alignment = 1
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="UILayer/Control/EnemyHUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 45.0
+max_value = 100.0
+value = 50.0
+
+[node name="EnemyArmorLabel" type="Label" parent="UILayer/Control/EnemyHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 70.0
+text = "护甲: 0"
+horizontal_alignment = 1
+
+[node name="IntentLabel" type="Label" parent="UILayer/Control/EnemyHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 75.0
+offset_right = 50.0
+offset_bottom = 95.0
+text = "意图: 攻击"
+horizontal_alignment = 1
+
+[node name="PlayerHUD" type="Panel" parent="UILayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 0.7
+anchor_right = 1.0
+anchor_bottom = 0.2
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="UILayer/Control/PlayerHUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 10.0
+offset_right = 60.0
+offset_bottom = 25.0
+max_value = 100.0
+value = 100.0
+
+[node name="PlayerArmorLabel" type="Label" parent="UILayer/Control/PlayerHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 30.0
+offset_right = 50.0
+offset_bottom = 50.0
+text = "护甲: 0"
+horizontal_alignment = 1
+
+[node name="EnergyLabel" type="Label" parent="UILayer/Control/PlayerHUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 55.0
+offset_right = 50.0
+offset_bottom = 75.0
+text = "能量: 3/3"
+horizontal_alignment = 1
+
+[node name="HandContainer" type="HBoxContainer" parent="UILayer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 500.0
+alignment = 1
+
+[node name="Card1" type="Panel" parent="UILayer/Control/HandContainer"]
+custom_minimum_size = Vector2(100, 150)
+
+[node name="CardLabel1" type="Label" parent="UILayer/Control/HandContainer/Card1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card2" type="Panel" parent="UILayer/Control/HandContainer"]
+custom_minimum_size = Vector2(100, 150)
+
+[node name="CardLabel2" type="Label" parent="UILayer/Control/HandContainer/Card2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card3" type="Panel" parent="UILayer/Control/HandContainer"]
+custom_minimum_size = Vector2(100, 150)
+
+[node name="CardLabel3" type="Label" parent="UILayer/Control/HandContainer/Card3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card4" type="Panel" parent="UILayer/Control/HandContainer"]
+custom_minimum_size = Vector2(100, 150)
+
+[node name="CardLabel4" type="Label" parent="UILayer/Control/HandContainer/Card4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Card5" type="Panel" parent="UILayer/Control/HandContainer"]
+custom_minimum_size = Vector2(100, 150)
+
+[node name="CardLabel5" type="Label" parent="UILayer/Control/HandContainer/Card5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "卡牌"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionPanel" type="Panel" parent="UILayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+
+[node name="EndTurnButton" type="Button" parent="UILayer/Control/ActionPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 10.0
+offset_right = 80.0
+offset_bottom = 40.0
+text = "结束回合"
+
+[node name="TurnLabel" type="Label" parent="UILayer/Control/ActionPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = -10.0
+text = "玩家回合"
+horizontal_alignment = 1
